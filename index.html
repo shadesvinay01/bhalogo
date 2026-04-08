@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>BhaloGo | Agartala's Fastest Delivery – 60 Minutes</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #1A2C2E;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --primary: #0D5C3C;
+      --primary-dark: #09452C;
+      --primary-light: #E8F5EF;
+      --accent: #F5B81B;
+      --accent-dark: #E0A80F;
+      --gray-bg: #F9FBF9;
+      --text-dark: #1F2A2C;
+      --text-gray: #5A6E6F;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.04);
+      --shadow-md: 0 20px 35px -12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 30px 50px -15px rgba(0,0,0,0.12);
+      --neon-glow: 0 0 5px #F5B81B, 0 0 10px #F5B81B, 0 0 20px rgba(245,184,27,0.5);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    h1, h2, h3, .logo-font {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+    .section-subhead {
+      text-align: center;
+      color: var(--text-gray);
+      font-size: 1.2rem;
+      margin-bottom: 48px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ========== NEON GLOW LOGO (Concept #9) ========== */
+    .logo-neon {
+      display: flex;
+      align-items: baseline;
+      gap: 0px;
+      flex-wrap: wrap;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-decoration: none;
+    }
+    .logo-neon .b-letter {
+      background: linear-gradient(135deg, #0D5C3C, #1E8A5E);
+      font-size: 2rem;
+      font-weight: 800;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border-radius: 16px;
+      margin-right: 6px;
+      box-shadow: 0 4px 12px rgba(13,92,60,0.3);
+      transition: all 0.3s;
+    }
+    .logo-neon .rest {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0D5C3C;
+      letter-spacing: -0.5px;
+    }
+    .logo-neon .accent {
+      color: #F5B81B;
+      text-shadow: 0 0 2px #F5B81B, 0 0 4px rgba(245,184,27,0.5);
+      animation: neonPulse 1.5s ease-in-out infinite;
+      display: inline-block;
+    }
+    .logo-neon .location-tag {
+      background: rgba(245,184,27,0.15);
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-left: 10px;
+      color: #0D5C3C;
+      backdrop-filter: blur(2px);
+    }
+    @keyframes neonPulse {
+      0%, 100% {
+        text-shadow: 0 0 2px #F5B81B, 0 0 5px #F5B81B, 0 0 8px rgba(245,184,27,0.4);
+      }
+      50% {
+        text-shadow: 0 0 5px #F5B81B, 0 0 12px #F5B81B, 0 0 20px rgba(245,184,27,0.7);
+      }
+    }
+    /* Hero specific neon logo */
+    .hero .logo-neon .b-letter {
+      background: white;
+      color: #0D5C3C;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .hero .logo-neon .rest {
+      color: white;
+    }
+    .hero .logo-neon .accent {
+      color: var(--accent);
+    }
+    .hero .logo-neon .location-tag {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 36px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 8px 20px rgba(13,92,60,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(13,92,60,0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary-light);
+      transform: translateY(-3px);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #0D5C3C 0%, #0a4a30 100%);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1584515933487-779824d29309?w=1600&q=80') center/cover no-repeat;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      align-items: center;
+    }
+    .hero-content {
+      text-align: center;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin: 20px 0;
+      color: white;
+    }
+    .hero h1 span {
+      color: var(--accent);
+      border-bottom: 4px solid var(--accent);
+      display: inline-block;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 32px;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin: 32px 0 28px;
+    }
+    .trust-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 8px 20px;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: white;
+    }
+
+    /* Quick Bar */
+    .quick-bar {
+      background: white;
+      border-radius: 80px;
+      padding: 20px 28px;
+      box-shadow: var(--shadow-lg);
+      margin-top: -40px;
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    /* Services Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 20px;
+    }
+    .service-card {
+      background: white;
+      padding: 40px 28px;
+      border-radius: 40px;
+      text-align: center;
+      transition: all 0.4s;
+      border: 1px solid rgba(13,92,60,0.08);
+      box-shadow: var(--shadow-sm);
+    }
+    .service-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    .service-card i {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+    .service-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    /* Steps */
+    .steps-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .step-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: white;
+      padding: 24px;
+      border-radius: 60px;
+      box-shadow: var(--shadow-sm);
+      transition: 0.3s;
+    }
+    .step-card:hover {
+      transform: translateX(10px);
+      box-shadow: var(--shadow-md);
+    }
+    .step-number {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* Testimonials */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .test-card {
+      background: white;
+      border-radius: 32px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      border-left: 6px solid var(--accent);
+    }
+    .stars {
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    /* Coverage */
+    .coverage-bg {
+      background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+      border-radius: 64px;
+      padding: 48px;
+    }
+    .area-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .chip {
+      background: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Partner Section */
+    .partner-section {
+      background: linear-gradient(145deg, var(--primary) 0%, #0a4a30 100%);
+      border-radius: 64px;
+      padding: 48px 40px;
+      text-align: center;
+      color: white;
+    }
+    .partner-section h3 {
+      color: var(--accent);
+    }
+
+    /* Sticky Buttons */
+    .sticky-wa, .sticky-call {
+      position: fixed;
+      bottom: 24px;
+      width: 58px;
+      height: 58px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: 0.2s;
+      color: white;
+      font-size: 28px;
+      text-decoration: none;
+      z-index: 1000;
+    }
+    .sticky-wa { right: 20px; background: #25D366; }
+    .sticky-call { left: 20px; background: var(--primary); }
+
+    footer {
+      background: #0C2E24;
+      color: #CDE3DC;
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+    .footer-credit {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+    .footer-credit a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .footer-credit a:hover {
+      text-decoration: underline;
+      color: white;
+    }
+    /* Footer logo neon */
+    footer .logo-neon .b-letter {
+      background: white;
+      color: #0D5C3C;
+    }
+    footer .logo-neon .rest {
+      color: white;
+    }
+    footer .logo-neon .accent {
+      color: var(--accent);
+    }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Popup */
+    .order-popup {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(16px);
+      border-radius: 80px;
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      z-index: 1100;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--accent);
+    }
+    .order-popup.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) scale(1);
+    }
+
+    @media (min-width: 768px) {
+      .hero-grid { flex-direction: row; text-align: left; gap: 60px; }
+      .hero-content { text-align: left; flex: 1; }
+      .hero-cta-group { justify-content: flex-start; }
+      .trust-strip { justify-content: flex-start; }
+      .cards-grid { grid-template-columns: repeat(3, 1fr); }
+      .steps-grid { flex-direction: row; }
+      .step-card { flex: 1; flex-direction: column; text-align: center; }
+      .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.8rem; }
+      .hero h1 { font-size: 2rem; }
+      .coverage-bg { padding: 28px; }
+      .logo-neon .rest { font-size: 1.3rem; }
+      .logo-neon .b-letter { width: 38px; height: 38px; font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Popup -->
+<div id="orderPopup" class="order-popup">
+  <i class="fas fa-gift" style="color: var(--accent); font-size: 28px;"></i>
+  <span style="font-weight: 600;">Need medicines or groceries? Order now!</span>
+  <button id="popupOrderBtn" style="background: var(--primary); border: none; padding: 8px 20px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer;">Order Now</button>
+</div>
+
+<main>
+  <!-- Hero Section with NEON GLOW LOGO -->
+  <div class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <!-- Neon Glow Logo #9 applied here -->
+        <a href="#" class="logo-neon" style="text-decoration: none; margin-bottom: 20px; display: inline-flex; align-items: center; flex-wrap: wrap;">
+          <div class="b-letter">B</div>
+          <div class="rest">halo<span class="accent">Go</span></div>
+          <span class="location-tag">Agartala</span>
+        </a>
+        <h1><span>Essentials Delivered</span><br>in 60 Minutes</h1>
+        <p>Medicines, groceries & emergency delivery — at your doorstep. Trusted by 100+ families in Agartala.</p>
+        <div class="hero-cta-group">
+          <a href="#" id="heroWhatsAppBtn" class="btn btn-primary" style="background: var(--accent); color: var(--primary-dark);"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+          <a href="tel:+917439071619" class="btn btn-outline" style="border-color: white; color: white;"><i class="fas fa-phone-alt"></i> Call Now</a>
+        </div>
+        <div class="trust-strip">
+          <div class="trust-item"><i class="fas fa-shield-alt"></i> 100% Secure</div>
+          <div class="trust-item"><i class="fas fa-bolt"></i> 60-min delivery</div>
+          <div class="trust-item"><i class="fas fa-store"></i> Local pharmacies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Action Bar -->
+  <div class="container">
+    <div class="quick-bar">
+      <p><i class="fab fa-whatsapp" style="color: #25D366;"></i> <strong>Order in seconds</strong> — just WhatsApp or call us!</p>
+      <div class="quick-buttons">
+        <a href="#" id="quickWABtn" class="btn btn-primary" style="padding: 12px 28px;"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+        <a href="tel:+917439071619" class="btn btn-outline" style="padding: 12px 28px;"><i class="fas fa-phone-alt"></i> Call for urgent</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section>
+    <div class="container">
+      <h2>What We Deliver</h2>
+      <div class="section-subhead">Fast, reliable, and always fresh — from local stores to your home</div>
+      <div class="cards-grid">
+        <div class="service-card fade-up">
+          <i class="fas fa-capsules"></i>
+          <h3>Emergency Medicines</h3>
+          <p>Prescription or OTC, get medicines within 60 mins. We partner with verified pharmacies.</p>
+        </div>
+        <div class="service-card fade-up">
+          <i class="fas fa-apple-alt"></i>
+          <h3>Grocery Essentials</h3>
+          <p>Milk, bread, eggs, vegetables — daily essentials delivered fresh.</p>
+        </div>
+        <div class="service-card fade-up">
+          <i class="fas fa-moon"></i>
+          <h3>Night & Urgent</h3>
+          <p>24/7 support for emergencies. We're just a call away, even at midnight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section style="background: var(--gray-bg);">
+    <div class="container">
+      <h2>How BhaloGo Works</h2>
+      <div class="steps-grid">
+        <div class="step-card fade-up">
+          <div class="step-number">1</div>
+          <div class="step-text"><h4>Send List / Prescription</h4><p>Share via WhatsApp or call us with your order</p></div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-number">2</div>
+          <div class="step-text"><h4>We Confirm Instantly</h4><p>Real-time confirmation & estimated delivery time</p></div>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-number">3</div>
+          <div class="step-text"><h4>Delivered in 60 Mins</h4><p>Contactless drop at your doorstep</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust + Testimonials -->
+  <section>
+    <div class="container">
+      <h2>Trusted by Agartala ❤️</h2>
+      <div class="testimonial-grid">
+        <div class="test-card fade-up">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>“BhaloGo delivered my father's medicine at 10:30 PM. Lifesaver! Highly recommend.”</p>
+          <strong>- Anita Deb, Arundhutinagar</strong>
+        </div>
+        <div class="test-card fade-up">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>“Fresh groceries and super fast. Best hyperlocal service in Agartala.”</p>
+          <strong>- Rohan Das, Banikya</strong>
+        </div>
+        <div class="test-card fade-up">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>“Their WhatsApp ordering is so smooth. Medicine arrived in 45 mins.”</p>
+          <strong>- Srijita Paul, Battala</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coverage Area -->
+  <section>
+    <div class="container">
+      <div class="coverage-bg">
+        <h2 style="color: var(--primary);">We Deliver Across Agartala</h2>
+        <div class="area-chips">
+          <span class="chip">Banikya</span><span class="chip">Arundhutinagar</span><span class="chip">Durjoynagar</span>
+          <span class="chip">Battala</span><span class="chip">Math Chowmuhani</span><span class="chip">Palace Compound</span>
+          <span class="chip">Kunjaban</span><span class="chip">Agartala City Center</span><span class="chip">Indranagar</span>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+          <i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> More areas coming soon — we're expanding!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pharmacy Partner CTA -->
+  <section>
+    <div class="container">
+      <div class="partner-section fade-up">
+        <i class="fas fa-store" style="font-size: 3rem; color: var(--accent); margin-bottom: 16px;"></i>
+        <h3 style="font-size: 1.8rem;">Are you a local pharmacy or store?</h3>
+        <p style="margin-bottom: 24px;">Partner with BhaloGo and reach more customers. Join Agartala's fastest delivery network.</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="#" id="partnerWABtn" class="btn btn-accent" style="background: var(--accent); color: var(--primary-dark);"><i class="fab fa-whatsapp"></i> Contact via WhatsApp</a>
+          <button id="toggleFormBtn" class="btn btn-outline" style="background: white; color: var(--primary);"><i class="fas fa-file-alt"></i> Fill Partner Form</button>
+        </div>
+        <div id="partnerFormContainer" style="display: none; margin-top: 32px; background: white; border-radius: 40px; padding: 28px; text-align: left; color: #1A2C2E;">
+          <h4 style="color: var(--primary);">Pharmacy Registration</h4>
+          <input type="text" id="pharmacyName" placeholder="Store Name" style="width:100%; margin: 12px 0; padding: 14px; border-radius: 60px; border:1px solid #ddd;">
+          <input type="text" id="ownerName" placeholder="Owner Name" style="width:100%; margin: 12px 0; padding: 14px; border-radius: 60px; border:1px solid #ddd;">
+          <input type="tel" id="pharmacyPhone" placeholder="Phone Number" style="width:100%; margin: 12px 0; padding: 14px; border-radius: 60px; border:1px solid #ddd;">
+          <textarea id="pharmacyAddress" rows="2" placeholder="Address (Agartala area)" style="width:100%; border-radius: 32px; padding: 14px;"></textarea>
+          <button id="submitPartnerFormBtn" class="btn btn-primary" style="width:100%; margin-top:12px;"><i class="fab fa-whatsapp"></i> Submit via WhatsApp</button>
+          <div id="partnerFormFeedback" style="margin-top: 12px; text-align: center;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <!-- Footer also uses Neon Glow Logo -->
+    <div class="logo-neon" style="justify-content: center; margin-bottom: 20px;">
+      <div class="b-letter">B</div>
+      <div class="rest">halo<span class="accent">Go</span></div>
+      <span class="location-tag">Agartala</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 24px;">
+      <a href="tel:+917439071619" style="color: #CDE3DC; text-decoration: none;"><i class="fas fa-phone-alt"></i> +91 74390 71619</a>
+      <a href="#" id="footerWALink" style="color: #CDE3DC; text-decoration: none;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="mailto:hello@bhalogo.com" style="color: #CDE3DC;"><i class="fas fa-envelope"></i> hello@bhalogo.com</a>
+    </div>
+    <div class="footer-credit">
+      Powered by <a href="https://www.optivra.in" target="_blank" rel="noopener noreferrer">Optivra</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky Buttons -->
+<a href="#" id="stickyWABtn" class="sticky-wa"><i class="fab fa-whatsapp"></i></a>
+<a href="tel:+917439071619" class="sticky-call"><i class="fas fa-phone-alt"></i></a>
+
+<script>
+  (function() {
+    const PHONE = "917439071619";
+    const WA_URL = `https://wa.me/${PHONE}?text=`;
+
+    function openWA(msg) { window.open(WA_URL + encodeURIComponent(msg), '_blank'); }
+
+    const orderButtons = ['heroWhatsAppBtn', 'quickWABtn', 'footerWALink', 'stickyWABtn'];
+    orderButtons.forEach(id => {
+      const btn = document.getElementById(id);
+      if(btn) btn.addEventListener('click', (e) => { e.preventDefault(); openWA("Hi BhaloGo! I need delivery in Agartala. Please share order details."); });
+    });
+
+    const partnerBtn = document.getElementById('partnerWABtn');
+    if(partnerBtn) partnerBtn.addEventListener('click', (e) => { e.preventDefault(); openWA("Hello BhaloGo team, I'm a pharmacy/store owner in Agartala. I want to partner with you."); });
+
+    const toggle = document.getElementById('toggleFormBtn');
+    const formDiv = document.getElementById('partnerFormContainer');
+    if(toggle && formDiv) toggle.addEventListener('click', () => {
+      const isVisible = formDiv.style.display === 'block';
+      formDiv.style.display = isVisible ? 'none' : 'block';
+      toggle.innerHTML = isVisible ? '<i class="fas fa-file-alt"></i> Fill Partner Form' : '<i class="fas fa-times"></i> Hide Form';
+    });
+
+    const submitBtn = document.getElementById('submitPartnerFormBtn');
+    if(submitBtn) submitBtn.addEventListener('click', () => {
+      const name = document.getElementById('pharmacyName')?.value.trim();
+      const owner = document.getElementById('ownerName')?.value.trim();
+      const phone = document.getElementById('pharmacyPhone')?.value.trim();
+      const addr = document.getElementById('pharmacyAddress')?.value.trim();
+      if(!name || !owner || !phone) {
+        document.getElementById('partnerFormFeedback').innerHTML = "⚠️ Please fill store name, owner & phone.";
+        return;
+      }
+      const msg = `🏥 New Pharmacy Partner Request 🏥\nStore: ${name}\nOwner: ${owner}\nPhone: ${phone}\nAddress: ${addr || 'Not provided'}`;
+      window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+      document.getElementById('partnerFormFeedback').innerHTML = "✅ Request sent! We'll contact you soon.";
+      setTimeout(() => { formDiv.style.display = 'none'; if(toggle) toggle.innerHTML = '<i class="fas fa-file-alt"></i> Fill Partner Form'; }, 2000);
+    });
+
+    const popup = document.getElementById('orderPopup');
+    const popupBtn = document.getElementById('popupOrderBtn');
+    setTimeout(() => { if(popup) popup.classList.add('show'); }, 10000);
+    if(popupBtn) popupBtn.addEventListener('click', () => {
+      openWA("Hi BhaloGo, I want to place an order right now.");
+      popup.classList.remove('show');
+    });
+    document.addEventListener('click', (e) => { if(popup && popup.classList.contains('show') && !popup.contains(e.target)) popup.classList.remove('show'); });
+
+    const faders = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('appear'); }); }, { threshold: 0.1 });
+    faders.forEach(el => obs.observe(el));
+  })();
+</script>
+</body>
+</html>
