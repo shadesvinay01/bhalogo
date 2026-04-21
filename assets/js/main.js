@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       trust_secure: "100% Secure",
       trust_60min: "60-min delivery",
       trust_local: "Local pharmacies",
+      trust_cod: "COD & UPI",
       quick_bar_text: "<strong>Order in seconds</strong> — just WhatsApp or call us!",
       call_urgent: "Call for urgent",
       services_title: "What We Deliver",
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       trust_secure: "১০০% নিরাপদ",
       trust_60min: "৬০-মিনিটে ডেলিভারি",
       trust_local: "স্থানীয় ফার্মেসি",
+      trust_cod: "ক্যাশ অন ডেলিভারি ও UPI",
       quick_bar_text: "<strong>কয়েক সেকেন্ডে অর্ডার করুন</strong> — শুধু হোয়াটসঅ্যাপ বা কল করুন!",
       call_urgent: "জরুরি কলের জন্য",
       services_title: "আমরা যা ডেলিভারি করি",
@@ -149,20 +151,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 2. Custom Cursor Logic ---
   const cursorDot = document.querySelector('.cursor-dot');
   const cursorRing = document.querySelector('.cursor-ring');
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   
-  if (cursorDot && cursorRing) {
-    window.addEventListener('mousemove', (e) => {
-      requestAnimationFrame(() => {
-        cursorDot.style.left = `${e.clientX}px`;
-        cursorDot.style.top = `${e.clientY}px`;
-        setTimeout(() => {
-          cursorRing.style.left = `${e.clientX}px`;
-          cursorRing.style.top = `${e.clientY}px`;
-        }, 50);
-      });
-    });
+  if (cursorDot && cursorRing && !isMobile) {
+    let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0, ringX = 0, ringY = 0;
+    window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    // Smooth LERP cursor for a fluid feel
+    (function animateCursor() {
+      dotX += (mouseX - dotX) * 0.25;
+      dotY += (mouseY - dotY) * 0.25;
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorDot.style.left = `${dotX}px`;
+      cursorDot.style.top = `${dotY}px`;
+      cursorRing.style.left = `${ringX}px`;
+      cursorRing.style.top = `${ringY}px`;
+      requestAnimationFrame(animateCursor);
+    })();
 
-    const interactives = document.querySelectorAll('a, button, input, textarea, label, .service-card, .step-card');
+    const interactives = document.querySelectorAll('a, button, input, textarea, label, .service-card, .step-card, .chip, .test-card');
     interactives.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -213,6 +220,113 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  // --- 4b. Scroll Progress Bar ---
+  const scrollBar = document.querySelector('.scroll-progress');
+  if (scrollBar) {
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      scrollBar.style.transform = `scaleX(${h > 0 ? window.scrollY / h : 0})`;
+    }, { passive: true });
+  }
+
+
+  // --- 4c. Floating Particles Canvas ---
+  const canvas = document.getElementById('particleCanvas');
+  if (canvas && !isMobile) {
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    for (let i = 0; i < 40; i++) {
+      particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+        r: Math.random()*2+1, dx: (Math.random()-0.5)*0.4, dy: (Math.random()-0.5)*0.4,
+        o: Math.random()*0.5+0.1 });
+    }
+    (function drawParticles() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const isDark = document.documentElement.classList.contains('dark-mode');
+      particles.forEach(p => {
+        p.x += p.dx; p.y += p.dy;
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = isDark ? `rgba(245,184,27,${p.o})` : `rgba(13,92,60,${p.o*0.5})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawParticles);
+    })();
+  }
+
+
+  // --- 4d. 3D Tilt on Cards ---
+  if (!isMobile) {
+    document.querySelectorAll('.service-card, .test-card').forEach(card => {
+      // inject shine overlay
+      const shine = document.createElement('div');
+      shine.className = 'card-shine';
+      card.appendChild(shine);
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        const cx = rect.width/2, cy = rect.height/2;
+        const rotY = ((x - cx) / cx) * 8;
+        const rotX = ((cy - y) / cy) * 8;
+        card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+        card.style.setProperty('--shine-x', `${(x/rect.width)*100}%`);
+        card.style.setProperty('--shine-y', `${(y/rect.height)*100}%`);
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+
+  // --- 4e. Magnetic Buttons + Ripple Click ---
+  document.querySelectorAll('.btn').forEach(btn => {
+    if (!isMobile) {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const dx = (e.clientX - rect.left - rect.width/2) * 0.25;
+        const dy = (e.clientY - rect.top - rect.height/2) * 0.25;
+        btn.style.transform = `translate(${dx}px, ${dy}px) scale(1.04)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    }
+    btn.addEventListener('click', (e) => {
+      const circle = document.createElement('span');
+      circle.className = 'ripple-circle';
+      const rect = btn.getBoundingClientRect();
+      const sz = Math.max(rect.width, rect.height) * 2;
+      circle.style.width = circle.style.height = sz + 'px';
+      circle.style.left = (e.clientX - rect.left - sz/2) + 'px';
+      circle.style.top = (e.clientY - rect.top - sz/2) + 'px';
+      btn.appendChild(circle);
+      setTimeout(() => circle.remove(), 700);
+    });
+  });
+
+
+  // --- 4f. Parallax Hero Orbs on Mouse ---
+  if (!isMobile) {
+    const hero = document.querySelector('.hero');
+    const orbs = document.querySelectorAll('.hero-orb');
+    if (hero && orbs.length) {
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const nx = (e.clientX - rect.left) / rect.width - 0.5;
+        const ny = (e.clientY - rect.top) / rect.height - 0.5;
+        orbs.forEach((orb, i) => {
+          const speed = (i + 1) * 20;
+          orb.style.transform = `translate(${nx*speed}px, ${ny*speed}px)`;
+        });
+      });
+    }
+  }
+
+
   // --- 5. WhatsApp & Popup Logic ---
   const PHONE = "917439071619";
   function openWA(msg) { window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank'); }
@@ -228,13 +342,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupBtn = document.getElementById('popupOrderBtn');
   
   if(popup) {
+    const footer = document.querySelector('footer');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
+      const footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
+      const windowH = window.innerHeight;
+      // Show between 400px scroll and when footer comes into view
+      if (window.scrollY > 400 && footerTop > windowH + 60) {
         popup.classList.add('show');
       } else {
         popup.classList.remove('show');
       }
-    });
+    }, { passive: true });
 
     if(popupBtn) {
       popupBtn.addEventListener('click', () => {
@@ -264,6 +382,14 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleBtn.innerHTML = '<i class="fas fa-file-alt"></i> <span data-i18n="partner_form_btn">Fill Partner Form</span>';
         applyLanguage(currentLang); // Re-apply text inside button just in case
       }
+    });
+  }
+
+  const partnerWABtn = document.getElementById('partnerWABtn');
+  if(partnerWABtn) {
+    partnerWABtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openWA("Hi BhaloGo! I am a local business and I would like to partner with you.");
     });
   }
 
