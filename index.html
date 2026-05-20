@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>BhaloGo | Agartala's Fastest Delivery – 60 Minutes</title>
+  <title>BhaloGo | Coming Soon – Something Amazing is Brewing</title>
   
-  <meta name="description" content="Medicines, groceries & emergency delivery — at your doorstep in Agartala within 60 minutes.">
+  <meta name="description" content="BhaloGo is coming soon. Agartala's fastest 60-minute delivery is undergoing a major upgrade. Stay tuned!">
   <meta name="theme-color" content="#0D5C3C">
   
   <!-- Custom SVG Favicon -->
@@ -26,248 +26,555 @@
   
   <link rel="stylesheet" href="assets/css/style.css">
   
-  <!-- SEO Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "DeliveryService",
-    "name": "BhaloGo",
-    "description": "60-minute delivery of medicines and groceries in Agartala.",
-    "telephone": "+917439071619",
-    "areaServed": "Agartala, Tripura"
-  }
-  </script>
+  <style>
+    /* Fullscreen Wrapper overrides for Coming Soon */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    
+    .coming-soon-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 20px;
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      flex: 1;
+    }
+    
+    .hero-bg-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      opacity: 1;
+    }
+    
+    .hero-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(10,74,48,0.5) 0%, rgba(5,43,27,0.7) 60%, rgba(3,26,16,0.9) 100%);
+      z-index: 2;
+    }
+    
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Decorative Floating Orbs with interactive movement */
+    .hero-orb {
+      position: fixed;
+      border-radius: 50%;
+      z-index: 2;
+      pointer-events: none;
+      filter: blur(80px);
+      transition: transform 0.3s cubic-bezier(0.1, 0.8, 0.3, 1);
+    }
+    .orb-green {
+      width: 320px;
+      height: 320px;
+      background: rgba(13, 92, 60, 0.22);
+      top: 15%;
+      left: 10%;
+    }
+    .orb-accent {
+      width: 280px;
+      height: 280px;
+      background: rgba(245, 184, 27, 0.16);
+      bottom: 15%;
+      right: 10%;
+    }
+    
+    .coming-soon-header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 20px;
+    }
+
+    .coming-soon-header .logo-neon .b-letter {
+      background: white;
+      color: #0D5C3C;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .coming-soon-header .logo-neon .rest { color: white; }
+    .coming-soon-header .logo-neon .location-tag { 
+      background: rgba(255,255,255,0.15); 
+      color: white; 
+      border-color: rgba(255,255,255,0.3); 
+    }
+    
+    /* Center Coming Soon Card */
+    .coming-soon-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 36px;
+      padding: 50px 40px;
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      margin: auto;
+      transition: background 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+    }
+    
+    html.dark-mode .coming-soon-card {
+      background: rgba(12, 12, 12, 0.5);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+    
+    html:not(.dark-mode) .coming-soon-card {
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(13, 92, 60, 0.15);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+    }
+    
+    .coming-soon-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    html:not(.dark-mode) .coming-soon-eyebrow {
+      color: var(--primary-dark);
+      background: rgba(13, 92, 60, 0.08);
+      padding: 6px 16px;
+      border-radius: 40px;
+    }
+    
+    .coming-soon-card h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.25;
+      margin-bottom: 20px;
+      font-weight: 800;
+      color: white;
+    }
+    html:not(.dark-mode) .coming-soon-card h1 {
+      color: var(--primary);
+    }
+    
+    .coming-soon-card h1 span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--accent);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .coming-soon-desc {
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 580px;
+      margin: 0 auto 30px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    html:not(.dark-mode) .coming-soon-desc {
+      color: var(--text-gray);
+    }
+
+    /* Countdown Styling */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 35px 0;
+    }
+    
+    .countdown-item {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 22px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    html.dark-mode .countdown-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+    html:not(.dark-mode) .countdown-item {
+      background: white;
+      border-color: rgba(13, 92, 60, 0.1);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .countdown-item:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(245, 184, 27, 0.15);
+    }
+    
+    .countdown-number {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      text-shadow: 0 4px 12px rgba(245, 184, 27, 0.2);
+    }
+    html:not(.dark-mode) .countdown-number {
+      color: var(--primary);
+      text-shadow: none;
+    }
+    
+    .countdown-label {
+      font-size: clamp(0.68rem, 1.5vw, 0.8rem);
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 8px;
+      letter-spacing: 1.2px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    html:not(.dark-mode) .countdown-label {
+      color: var(--text-gray);
+    }
+
+    /* Email Interactive Copy Card */
+    .email-container {
+      margin-top: 40px;
+    }
+
+    .notify-title {
+      font-size: 1.15rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+    }
+    html:not(.dark-mode) .notify-title {
+      color: var(--text-dark);
+    }
+
+    .notify-desc {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    html:not(.dark-mode) .notify-desc {
+      color: var(--text-gray);
+    }
+
+    .email-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 12px 20px;
+      max-width: 440px;
+      width: 100%;
+      margin: 0 auto 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+    }
+    html.dark-mode .email-card {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    html:not(.dark-mode) .email-card {
+      background: rgba(13, 92, 60, 0.03);
+      border-color: rgba(13, 92, 60, 0.25);
+    }
+    
+    .email-card:hover {
+      transform: scale(1.03);
+      border-color: var(--accent);
+      background: rgba(245, 184, 27, 0.05);
+      box-shadow: 0 10px 25px rgba(245, 184, 27, 0.08);
+    }
+    
+    .email-details {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: white;
+    }
+    html:not(.dark-mode) .email-details {
+      color: var(--primary);
+    }
+    
+    .email-icon {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 8px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    html:not(.dark-mode) .copy-btn {
+      background: var(--primary);
+      border: none;
+      color: white;
+    }
+    
+    .copy-btn:hover {
+      background: var(--accent);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    /* Buttons Row */
+    .buttons-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    /* Footer overrides */
+    footer.coming-soon-footer {
+      width: 100%;
+      background: transparent;
+      padding: 20px 0;
+      position: relative;
+      z-index: 10;
+      border-top: none;
+    }
+    
+    footer.coming-soon-footer .footer-credit {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.95rem;
+    }
+    html:not(.dark-mode) footer.coming-soon-footer .footer-credit {
+      color: var(--text-gray);
+    }
+    
+    footer.coming-soon-footer .footer-credit a {
+      color: var(--accent);
+    }
+    html:not(.dark-mode) footer.coming-soon-footer .footer-credit a {
+      color: var(--primary);
+    }
+
+    /* Adjust position of early buttons */
+    .theme-toggle-btn, .lang-toggle-btn {
+      position: relative;
+      top: 0;
+      right: 0;
+    }
+    
+    .toggles-container {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .theme-toggle-btn, .lang-toggle-btn {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        background: rgba(255,255,255,0.15) !important;
+        border: 1px solid rgba(255,255,255,0.3) !important;
+        color: white !important;
+        backdrop-filter: blur(8px) !important;
+        z-index: 100 !important;
+      }
+      .theme-toggle-btn {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+      }
+      .lang-toggle-btn {
+        height: 44px !important;
+        padding: 0 16px !important;
+        border-radius: 40px !important;
+        font-size: 0.8rem !important;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .coming-soon-card {
+        padding: 35px 24px;
+        border-radius: 28px;
+      }
+      .countdown-grid {
+        gap: 10px;
+        margin: 25px 0;
+      }
+      .countdown-item {
+        padding: 16px 6px;
+        border-radius: 16px;
+      }
+      .countdown-number {
+        font-size: 1.6rem;
+      }
+      .countdown-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.8px;
+        margin-top: 6px;
+      }
+      .coming-soon-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+      }
+      .email-card {
+        padding: 10px 14px;
+      }
+      .email-details {
+        font-size: 0.92rem;
+        gap: 8px;
+      }
+      .copy-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Scroll Progress Bar -->
-<div class="scroll-progress"></div>
-
 <!-- Floating Particles -->
 <canvas id="particleCanvas"></canvas>
+
+<!-- Background Video & Overlay -->
+<video autoplay muted loop playsinline preload="metadata" class="hero-bg-video" oncanplay="this.play()">
+  <source src="./assets/bg-video.mp4" type="video/mp4">
+</video>
+<div class="hero-overlay"></div>
+
+<!-- Decorative Interactive Blur Orbs -->
+<div class="hero-orb orb-green"></div>
+<div class="hero-orb orb-accent"></div>
 
 <!-- Custom Pointer -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 
-<!-- Language Toggle Button -->
-<button id="langToggle" class="lang-toggle-btn" aria-label="Toggle Language" data-i18n="lang_btn">বাংলা</button>
-
-<!-- Theme Toggle Button -->
-<button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
-  <i class="fa-solid fa-moon"></i>
-  <i class="fa-solid fa-sun"></i>
-</button>
-
-<!-- Scroll-Triggered Gift Popup -->
-<div id="orderPopup" class="order-popup">
-  <i class="fas fa-gift" style="color: var(--accent); font-size: 28px;"></i>
-  <span data-i18n="popup_txt">Need medicines or groceries? Order now!</span>
-  <button id="popupOrderBtn" data-i18n="popup_btn">Order Now</button>
-</div>
-
-<main>
-  <!-- Hero Section -->
-  <div class="hero">
-    <video autoplay muted loop playsinline preload="metadata" class="hero-bg-video" oncanplay="this.play()">
-      <source src="./assets/bg-video.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay"></div>
-    <div class="container hero-grid">
-      <div class="hero-content js-anim" data-transform="translateY(30px)">
-        <a href="#" class="logo-neon" style="margin-bottom: 28px; display: inline-flex;">
-          <div class="b-letter">B</div>
-          <div class="rest">halo<span class="accent">Go</span></div>
-          <span class="location-tag" data-i18n="location_tag">Agartala</span>
-        </a>
-        <p class="hero-eyebrow">⚡ Agartala's fastest hyperlocal delivery</p>
-        <h1 data-i18n-html="hero_title"><span>Essentials Delivered</span><br>in 60 Minutes</h1>
-        <p class="hero-sub" data-i18n="hero_desc">Medicines, groceries & emergency delivery — at your doorstep. Trusted by 100+ families in Agartala.</p>
-        <div class="hero-badges">
-          <div class="hero-badge" style="animation-delay: 0.1s"><i class="fas fa-shield-alt"></i> <span data-i18n="trust_secure">100% Secure</span></div>
-          <div class="hero-badge" style="animation-delay: 0.25s"><i class="fas fa-bolt"></i> <span data-i18n="trust_60min">60-min delivery</span></div>
-          <div class="hero-badge" style="animation-delay: 0.4s"><i class="fas fa-wallet"></i> <span data-i18n="trust_cod">COD & UPI</span></div>
-        </div>
-      </div>
-      <div class="hero-img js-anim" data-delay="200" data-transform="translateY(20px)">
-        <img src="assets/delivery-hero.png" alt="BhaloGo Delivery">
-      </div>
-    </div>
-  </div>
-
-  <!-- Quick Action Bar -->
-  <div class="container">
-    <div class="quick-bar js-anim" data-delay="100" data-transform="translateY(20px)">
-      <p style="color: var(--text-dark); margin-bottom: 12px; font-size: 0.92rem;"><i class="fab fa-whatsapp" style="color: #25D366;"></i> <span data-i18n-html="quick_bar_text"><strong>Order in seconds</strong> — just WhatsApp or call us!</span></p>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
-        <a href="#" class="btn btn-primary trigger-wa-order" style="padding: 10px 24px; font-size: 0.85rem;"><i class="fab fa-whatsapp"></i> <span data-i18n="wa_order">Order on WhatsApp</span></a>
-        <a href="tel:+917439071619" class="btn btn-outline" style="padding: 10px 24px; font-size: 0.85rem;"><i class="fas fa-phone-alt"></i> <span data-i18n="call_urgent">Call for urgent</span></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Services Section -->
-  <section>
-    <div class="container">
-      <h2 class="js-anim" data-i18n="services_title">What We Deliver</h2>
-      <div class="section-subhead js-anim" data-i18n="services_sub">Fast, reliable, and always fresh — from local stores to your home</div>
-      <div class="cards-grid">
-        <div class="service-card js-anim" data-delay="0">
-          <i class="fas fa-capsules"></i>
-          <h3 data-i18n="srv1_title">Emergency Medicines</h3>
-          <p data-i18n="srv1_desc">Prescription or OTC, get medicines within 60 mins. We partner with verified pharmacies.</p>
-        </div>
-        <div class="service-card js-anim" data-delay="150">
-          <i class="fas fa-apple-alt"></i>
-          <h3 data-i18n="srv2_title">Grocery Essentials</h3>
-          <p data-i18n="srv2_desc">Milk, bread, eggs, vegetables — daily essentials delivered fresh.</p>
-        </div>
-        <div class="service-card js-anim" data-delay="300">
-          <i class="fas fa-baby-carriage"></i>
-          <h3 data-i18n="srv3_title">Baby & Personal Care</h3>
-          <p data-i18n="srv3_desc">Diapers, baby food, hygiene products, and personal care items delivered instantly.</p>
-        </div>
-      </div>
-      
-      <!-- Night Note Highlights -->
-      <div class="night-note js-anim" data-delay="400" data-i18n-html="night_note">
-        🌙 <strong>Night & Urgent Delivery:</strong> 24/7 support for medical emergencies. We're just a call away, even at midnight.
-      </div>
-    </div>
-  </section>
-
-  <!-- How It Works -->
-  <section style="background: var(--gray-bg);">
-    <div class="container">
-      <h2 class="js-anim" data-i18n="how_title">How BhaloGo Works</h2>
-      <div class="steps-grid" style="margin-top: 40px;">
-        <div class="step-card js-anim" data-delay="0" data-transform="translateX(-40px)">
-          <div class="step-number">1</div>
-          <div class="step-text">
-            <h4 data-i18n="step1_title">Send List / Prescription</h4>
-            <p data-i18n="step1_desc">Share via WhatsApp or call us with your order</p>
-          </div>
-        </div>
-        <div class="step-card js-anim" data-delay="150" data-transform="translateX(-40px)">
-          <div class="step-number">2</div>
-          <div class="step-text">
-            <h4 data-i18n="step2_title">We Confirm Instantly</h4>
-            <p data-i18n="step2_desc">Real-time confirmation & estimated delivery time</p>
-          </div>
-        </div>
-        <div class="step-card js-anim" data-delay="300" data-transform="translateX(-40px)">
-          <div class="step-number">3</div>
-          <div class="step-text">
-            <h4 data-i18n="step3_title">Delivered in 60 Mins</h4>
-            <p data-i18n="step3_desc">Contactless drop at your doorstep</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust + Testimonials -->
-  <section>
-    <div class="container">
-      <h2 class="js-anim" data-i18n="trust_title">Trusted by Agartala ❤️</h2>
-      <div class="testimonial-grid" style="margin-top: 40px;">
-        <div class="test-card js-anim" data-delay="0">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p data-i18n="test1_txt">“BhaloGo delivered my father's medicine at 10:30 PM. Lifesaver! Highly recommend.”</p>
-          <strong data-i18n="test1_auth">- Anita Deb, Arundhutinagar</strong>
-        </div>
-        <div class="test-card js-anim" data-delay="150">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p data-i18n="test2_txt">“Fresh groceries and super fast. Best hyperlocal service in Agartala.”</p>
-          <strong data-i18n="test2_auth">- Rohan Das, Banikya</strong>
-        </div>
-        <div class="test-card js-anim" data-delay="300">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p data-i18n="test3_txt">“Their WhatsApp ordering is so smooth. Medicine arrived in 45 mins.”</p>
-          <strong data-i18n="test3_auth">- Srijita Paul, Battala</strong>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Coverage Area -->
-  <section>
-    <div class="container js-anim">
-      <div class="coverage-bg">
-        <h2 style="color: var(--primary);" data-i18n="coverage_title">We Deliver Across Agartala</h2>
-        <div class="area-chips">
-          <span class="chip">Banikya</span><span class="chip">Arundhutinagar</span><span class="chip">Durjoynagar</span>
-          <span class="chip">Battala</span><span class="chip">Math Chowmuhani</span><span class="chip">Palace Compound</span>
-          <span class="chip">Kunjaban</span><span class="chip">Agartala City Center</span><span class="chip">Indranagar</span>
-        </div>
-        <div style="text-align: center; margin-top: 30px; color: var(--text-dark); font-size: 1.1rem; font-family: 'Outfit', sans-serif;">
-          <i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> <span data-i18n="coverage_note">More areas coming soon — we're expanding!</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pharmacy Partner CTA -->
-  <section>
-    <div class="container">
-      <div class="partner-section js-anim">
-        <i class="fas fa-store" style="font-size: 3rem; color: var(--accent); margin-bottom: 16px;"></i>
-        <h3 data-i18n="partner_title">Are you a local pharmacy or store?</h3>
-        <p data-i18n="partner_sub">Partner with BhaloGo and reach more customers. Join Agartala's fastest delivery network.</p>
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-          <a href="#" id="partnerWABtn" class="btn btn-primary"><i class="fab fa-whatsapp"></i> <span data-i18n="partner_wa">Contact via WhatsApp</span></a>
-          <button id="toggleFormBtn" class="btn btn-outline" style="border-color: rgba(255,255,255,0.4); color: white;"><i class="fas fa-file-alt"></i> <span data-i18n="partner_form_btn">Fill Partner Form</span></button>
-        </div>
-        
-        <div id="partnerFormContainer" class="custom-form" style="display: none;">
-          <h4 style="color: var(--primary); text-align: center; font-size: 1.6rem; font-family: 'Outfit', sans-serif; margin-bottom: 24px;" data-i18n="form_title">Partner Registration</h4>
-          <form id="partnerForm">
-            <div class="radio-row">
-              <label><input type="radio" name="businessType" value="Pharmacy" checked> <span data-i18n="form_pharmacy">Pharmacy</span></label>
-              <label><input type="radio" name="businessType" value="Store"> <span data-i18n="form_store">Grocery / General Store</span></label>
-            </div>
-            <input type="text" id="businessName" class="form-input" placeholder="Business Name" data-placeholder-i18n="placeholder_biz" required>
-            <input type="text" id="ownerName" class="form-input" placeholder="Owner Name" data-placeholder-i18n="placeholder_owner" required>
-            <input type="tel" id="businessPhone" class="form-input" placeholder="Phone Number" data-placeholder-i18n="placeholder_phone" required>
-            <textarea id="businessAddress" class="form-input" rows="2" placeholder="Address (Agartala area)" data-placeholder-i18n="placeholder_addr"></textarea>
-            <button type="submit" id="submitPartnerFormBtn" class="btn btn-primary" style="width:100%; margin-top:20px;"><i class="fab fa-whatsapp"></i> <span data-i18n="form_btn">Submit via WhatsApp</span></button>
-            <div id="partnerFormFeedback" style="margin-top: 16px; text-align: center; font-weight: bold; font-family: 'Outfit', sans-serif;"></div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="container">
-    <div class="logo-neon" style="justify-content: center; margin-bottom: 24px;">
+<div class="coming-soon-wrapper">
+  
+  <!-- Header with Neon Logo & Toggles -->
+  <header class="coming-soon-header">
+    <a href="#" class="logo-neon">
       <div class="b-letter">B</div>
       <div class="rest">halo<span class="accent">Go</span></div>
       <span class="location-tag" data-i18n="location_tag">Agartala</span>
+    </a>
+    
+    <div class="toggles-container">
+      <!-- Language Toggle -->
+      <button id="langToggle" class="lang-toggle-btn" aria-label="Toggle Language" data-i18n="lang_btn">বাংলা</button>
+      
+      <!-- Theme Toggle -->
+      <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+      </button>
     </div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 24px; font-family: 'Outfit', sans-serif; font-size: 1.1rem;">
-      <a href="tel:+917439071619" style="color: var(--footer-text); text-decoration: none;"><i class="fas fa-phone-alt"></i> +91 74390 71619</a>
-      <a href="#" class="trigger-wa-order" style="color: var(--footer-text); text-decoration: none;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-      <a href="mailto:hello@bhalogo.com" style="color: var(--footer-text); text-decoration: none;"><i class="fas fa-envelope"></i> hello@bhalogo.com</a>
+  </header>
+
+  <!-- Central Card -->
+  <main class="coming-soon-card js-anim" data-transform="translateY(30px)">
+    <p class="coming-soon-eyebrow" data-i18n="coming_soon_eyebrow">⚡ We are preparing something amazing</p>
+    
+    <h1 data-i18n-html="coming_soon_title"><span>BhaloGo</span> is Coming Soon!</h1>
+    
+    <p class="coming-soon-desc" data-i18n="coming_soon_desc">Agartala's fastest 60-minute delivery is undergoing a major upgrade. Stay tuned for a smarter, faster, and more beautiful experience.</p>
+    
+    <!-- Countdown Timer -->
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <div id="days" class="countdown-number">00</div>
+        <div class="countdown-label" data-i18n="countdown_days">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div id="hours" class="countdown-number">00</div>
+        <div class="countdown-label" data-i18n="countdown_hours">Hours</div>
+      </div>
+      <div class="countdown-item">
+        <div id="minutes" class="countdown-number">00</div>
+        <div class="countdown-label" data-i18n="countdown_mins">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <div id="seconds" class="countdown-number">00</div>
+        <div class="countdown-label" data-i18n="countdown_secs">Seconds</div>
+      </div>
     </div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; font-family: 'Outfit', sans-serif; font-size: 0.95rem;">
-      <span style="background: rgba(255,255,255,0.08); padding: 8px 20px; border-radius: 40px; color: var(--footer-text); border: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-money-bill-wave" style="color: var(--accent);"></i> Cash on Delivery</span>
-      <span style="background: rgba(255,255,255,0.08); padding: 8px 20px; border-radius: 40px; color: var(--footer-text); border: 1px solid rgba(255,255,255,0.1);"><i class="fas fa-mobile-alt" style="color: var(--accent);"></i> UPI Payments</span>
+    
+    <!-- Email Notification Container -->
+    <div class="email-container">
+      <h2 class="notify-title" data-i18n="notify_title">Want to get notified when we launch?</h2>
+      <p class="notify-desc" data-i18n="notify_desc">Drop us an email, and you'll be the first to know when we are live! Or reach out to partner with us.</p>
+      
+      <!-- Copy-to-Clipboard Email Card -->
+      <div id="emailCard" class="email-card">
+        <div class="email-details">
+          <i class="fas fa-envelope email-icon"></i>
+          <span data-i18n="contact_email">hello@optivra.in</span>
+        </div>
+        <button id="copyBtn" class="copy-btn">
+          <i class="fas fa-copy"></i>
+          <span class="copy-label" data-i18n="btn_copy">Copy</span>
+        </button>
+      </div>
     </div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-bottom: 24px; font-family: 'Outfit', sans-serif; font-size: 0.95rem;">
-      <a href="terms.html" style="color: var(--footer-text); text-decoration: none; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Terms & Conditions</a>
-      <a href="privacy.html" style="color: var(--footer-text); text-decoration: none; opacity: 0.7; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Privacy Policy</a>
-    </div>
+  </main>
+
+  <!-- Footer Credit -->
+  <footer class="coming-soon-footer">
     <div class="footer-credit" data-i18n-html="footer_credit">
       Powered by <a href="https://www.optivra.in" target="_blank" rel="noopener noreferrer">Optivra</a>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- Original Sticky Buttons -->
-<a href="#" class="sticky-wa trigger-wa-order"><i class="fab fa-whatsapp"></i></a>
-<a href="tel:+917439071619" class="sticky-call"><i class="fas fa-phone-alt"></i></a>
+</div>
 
 <!-- External JS -->
 <script src="assets/js/main.js"></script>
